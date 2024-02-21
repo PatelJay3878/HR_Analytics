@@ -1,0 +1,50 @@
+-- List of Healthy Individuals & Low Absenteeism
+-- Find Healthiest employees
+-- Criteria For Healthy life: they are non smoker & non drinker
+SELECT * FROM sql_project_01.absenteeism_at_work a
+WHERE a.Social_drinker = 0 AND
+ a.Social_smoker = 0 AND
+ Body_mass_index < 25 AND
+ Absenteeism_time_in_hours < (SELECT AVG(Absenteeism_time_in_hours) FROM sql_project_01.absenteeism_at_work);
+
+SELECT * FROM sql_project_01.absenteeism_at_work;
+
+-- Annual Compensation rate increase for non smokers/ budget $983,221
+SELECT COUNT(*) AS non_smokers FROM sql_project_01.absenteeism_at_work
+WHERE Social_smoker = 0;
+-- from above query we will get total no. of non smokers.
+-- we will now mathematical calulate the increase in compensation rate.
+-- i.e. Total non smokers = 686 | total budget is $983,221 | Working hrs: 8(hrs)*5(days)*52(weeks)*686(employees) = 1,426,880 hrs in total.alter
+-- increase rate: 983,221/1,426,880 = 0.689
+-- so for each individual they will have an increase of 2000(hrs)*0.6= $ 1,414.4 in their salary per year.
+
+
+-- optimizing queries.
+-- the reason behind optimization: 
+-- 1) we are using wild card * which is not recommended we have to specify what is required.
+-- There are 2 ID cols. (duplicate cols.)
+
+
+
+SELECT a.ID, r.Reason, a.Month_of_absence, a.Body_mass_index,
+a.Seasons, a.Month_of_absence, a.Day_of_the_week, a.Transportation_expense,
+a.Education, a.Son, a.Social_drinker, a.Social_smoker, a.Pet, a.Disciplinary_failure,
+a.Age, a.Work_load_Average_per_day,
+
+CASE WHEN Body_mass_index > 18.5 Then 'Underweight'
+	 WHEN Body_mass_index between 18.5 and 24.9 Then 'Healthy Weight'
+     WHEN Body_mass_index between 25 and 29.9 Then 'Overweight'
+     WHEN Body_mass_index > 30 Then 'Obese'
+     ELSE 'Unknown' end as BMI_category,
+     
+CASE WHEN Month_of_absence IN (12,1,2) Then 'Winter'
+	 WHEN Month_of_absence IN (3,4,5) Then 'Spring'
+     WHEN Month_of_absence IN (6,7,8) Then 'Summer'
+     WHEN Month_of_absence IN (9,10,11) Then 'Fall'
+     ELSE 'Unknown' end as Season_Name
+
+FROM sql_project_01.absenteeism_at_work a
+LEFT JOIN sql_project_01.compensation c 
+ON a.ID = c.ID
+LEFT JOIN sql_project_01.reasons r ON 
+a.Reason_for_absence = r.Number; 
