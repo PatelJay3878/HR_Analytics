@@ -6,6 +6,9 @@
 
 ## Overview
 This HR Dashboard project is an end-to-end solution aimed at evaluating an HR dataset focused on absenteeism and health factors within the workplace. The project utilizes SQL queries for data transformation and analysis, culminating in the development of a comprehensive dashboard using Power BI. The dashboard visualizes key HR KPIs, including body mass categories, number of pets owned by employees, educational degrees earned, number of children, trend of average absenteeism time in hours by month and day, and a comparison of transportation costs and average workload per day.
+
+![dashboard](https://github.com/PatelJay3878/HR_Analytics/assets/73180853/fccf7bd3-2d60-4bf9-a389-0697c273fe90)
+
 ## Key Features
 •	**MySQL Database Creation:**
 A MySQL database is created to store the HR dataset, with formatted titles for the required columns.
