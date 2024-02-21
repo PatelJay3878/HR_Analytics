@@ -1,7 +1,7 @@
 
 # HR Dashboard for Absenteeism and Health Evaluation
 
-A brief description of what this project does and who it's for
+
 
 
 ## Overview
